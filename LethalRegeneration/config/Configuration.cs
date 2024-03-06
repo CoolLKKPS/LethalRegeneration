@@ -23,6 +23,8 @@ public class Configuration : ConfigurationSync<Configuration>
     public int RegenerationPowerOutsideShip { get; private set; }
     public bool HealingUpgradeEnabled { get; private set; }
     public int HealingUpgradePrice { get; private set; }
+    public int RegenerationLimitPerPlayer { get; private set; }
+
 
     [NonSerialized]
     readonly ConfigFile configFile;
@@ -46,6 +48,8 @@ public class Configuration : ConfigurationSync<Configuration>
 
         HealingUpgradeEnabled = NewEntry("Values", "Regeneration As Upgrade", DefaultHealingUpgradeEnabled, "Makes natural health regeneration an upgrade for the ship and has to be purchased to make it work.");
         HealingUpgradePrice = NewEntry("Values", "Upgrade Price", DefaultHealingUpgradePrice, "Changes the price of ship upgrade for health regeneration. Only works if ship upgrade is enabled");
+
+        RegenerationLimitPerPlayer = NewEntry("Values", "Regeneration Limit Per Player", -1, "Regeneration limit in a round (If the value is '-1' this option will be unlimited)");
 
         RegenerationPower = 100 >= RegenerationPower && RegenerationPower > 0 ? RegenerationPower : DefaultRegenerationPower;
         TicksPerRegeneration = TicksPerRegeneration > 0 ? TicksPerRegeneration : DefaultTicksPerRegeneration;

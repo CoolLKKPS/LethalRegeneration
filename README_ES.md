@@ -49,6 +49,12 @@ Mod personalizable de regeneración natural de la salud que se sincroniza con el
 -   **Descripción**: Dinero que cuesta la mejora de la nave.
 -   **Valores válidos**: Más de 0
 
+### Límite de Regeneración por Persona
+
+-   **Valor por defecto**: -1
+-   **Descripción**: Límite de regeneración en una ronda.
+-   **Valores válidos**: Más de 0 (-1 para que sea ilimitado)
+
 ## Créditos
 
 -   Programado por [Toskan4134](https://discordapp.com/users/356817504330448906)

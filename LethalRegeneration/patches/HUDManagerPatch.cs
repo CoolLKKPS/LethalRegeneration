@@ -19,14 +19,17 @@ internal class HUDManagerPatch
     private static bool healingUpgradeUnlocked => Configuration.Instance.HealingUpgradeUnlocked;
     private static bool healingUpgradeEnabled => Configuration.Instance.HealingUpgradeEnabled;
     private static int maxHealth => StartMatchLeverPatch.maxHealth;
+    public static int regenerationLimitPerPlayer => Configuration.Instance.RegenerationLimitPerPlayer;
+    public static int currentRegenerationLimitPerPlayer = regenerationLimitPerPlayer;
+
 
     [HarmonyPatch("SetClock")]
     [HarmonyPostfix]
     public static void healingPostfix()
     {
-
         playerControllerB = GameNetworkManager.Instance.localPlayerController;
         if (healingUpgradeEnabled && !healingUpgradeUnlocked) return;
+        if (regenerationLimitPerPlayer != -1 && currentRegenerationLimitPerPlayer <= 0) return;
         if (!playerControllerB.IsOwner || playerControllerB.isPlayerDead || !playerControllerB.AllowPlayerDeath() || playerControllerB.health >= maxHealth) return;
         if (playerControllerB.isInHangarShipRoom)
         {
@@ -35,6 +38,7 @@ internal class HUDManagerPatch
                 currentTicksPerRegeneration = ticksPerRegeneration;
                 LethalRegenerationBase.Logger.LogInfo("Healed " + regenerationPower);
                 int regeneratedHealth = playerControllerB.health + regenerationPower;
+                currentRegenerationLimitPerPlayer -= regenerationPower;
                 playerControllerB.health = regeneratedHealth > maxHealth ? maxHealth : regeneratedHealth;
                 HUDManager.Instance.UpdateHealthUI(playerControllerB.health, false);
                 playerControllerB.DamagePlayerClientRpc(-regenerationPower, playerControllerB.health);
@@ -53,6 +57,7 @@ internal class HUDManagerPatch
                 currentTicksPerRegenerationOutsideShip = ticksPerRegenerationOutsideShip;
                 LethalRegenerationBase.Logger.LogInfo("Healed " + regenerationPowerOutsideShip);
                 int regeneratedHealth = playerControllerB.health + regenerationPowerOutsideShip;
+                currentRegenerationLimitPerPlayer -= regenerationPowerOutsideShip;
                 playerControllerB.health = regeneratedHealth > maxHealth ? maxHealth : regeneratedHealth;
                 HUDManager.Instance.UpdateHealthUI(playerControllerB.health, false);
                 playerControllerB.DamagePlayerClientRpc(-regenerationPowerOutsideShip, playerControllerB.health);

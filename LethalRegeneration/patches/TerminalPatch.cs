@@ -105,11 +105,11 @@ public class TerminalPatch
         itemInfo.name = "LethalRegeneration_" + itemName.Replace(" ", "-") + "InfoNode";
         if (Configuration.Instance.RegenerationOutsideShip)
         {
-            itemInfo.displayText = $"Your health regenerates inside and outside the ship\n\nINSIDE THE SHIP\nThe healing is activated each {Configuration.Instance.TicksPerRegeneration} ticks\nThe healing power is {Configuration.Instance.RegenerationPower}hp per tick\n\nOUTSIDE THE SHIP\nThe healing is activated each {Configuration.Instance.TicksPerRegenerationOutsideShip} ticks\nThe healing power is {Configuration.Instance.RegenerationPowerOutsideShip}hp per tick\n\n";
+            itemInfo.displayText = $"Your health regenerates inside and outside the ship\n\nINSIDE THE SHIP\nThe healing is activated each {Configuration.Instance.TicksPerRegeneration} ticks\nThe healing power is {Configuration.Instance.RegenerationPower}hp per tick\n\nOUTSIDE THE SHIP\nThe healing is activated each {Configuration.Instance.TicksPerRegenerationOutsideShip} ticks\nThe healing power is {Configuration.Instance.RegenerationPowerOutsideShip}hp per tick\nThe regeneration limit per player is {Configuration.Instance.RegenerationLimitPerPlayer}hp per round\n\n";
         }
         else
         {
-            itemInfo.displayText = $"Your health regenerates only inside the ship\n\nThe healing is activated each {Configuration.Instance.TicksPerRegeneration} ticks\nThe healing power is {Configuration.Instance.RegenerationPower}hp per tick\n\n";
+            itemInfo.displayText = $"Your health regenerates only inside the ship\n\nThe healing is activated each {Configuration.Instance.TicksPerRegeneration} ticks\nThe healing power is {Configuration.Instance.RegenerationPower}hp per tick\nThe regeneration limit per player is {Configuration.Instance.RegenerationLimitPerPlayer}hp per round\n\n";
 
         }
         itemInfo.clearPreviousText = true;

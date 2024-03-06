@@ -16,6 +16,7 @@ public class StartMatchLeverPatch
         if (___leverHasBeenPulled)
         {
             maxHealth = ___playersManager.localPlayerController.health;
+            HUDManagerPatch.currentRegenerationLimitPerPlayer = HUDManagerPatch.regenerationLimitPerPlayer;
         }
     }
 }
